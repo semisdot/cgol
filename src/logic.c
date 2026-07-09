@@ -13,6 +13,7 @@ void logic(struct events *events, struct game *game)
 	switch (game->state)
 	{
 		case PAUSED:
+
 			if (events->keyboard.keys[SDL_SCANCODE_SPACE])
 			{
 				update_game_state(events, game, RUNNING);
@@ -20,7 +21,8 @@ void logic(struct events *events, struct game *game)
 			}
 			else if (events->keyboard.keys[SDL_SCANCODE_RETURN])
 			{
-				update_game_state(events, game, NEW);
+				init_game(game);
+				update_game_state(events, game, PAUSED);
 				return;
 			}
 
@@ -48,7 +50,7 @@ void logic(struct events *events, struct game *game)
 				return;
 			}
 
-            if (now - last_update >= 100)  // 100 ms = 10 updates/sec
+            if (now - last_update >= 100) // 100 ms = 10 updates/sec
             {
                 simulation_step(game);
                 last_update = now;
@@ -56,13 +58,17 @@ void logic(struct events *events, struct game *game)
 
 			break;
 		}
-
-		case NEW:
-			init_game(game);
-
-			update_game_state(events, game, PAUSED);
-			break;
 	}
+}
+
+void update_game_state(struct events *events, struct game *game, int state)
+{
+	// clear events
+	memset(events->keyboard.keys, 0, sizeof(events->keyboard.keys));
+	memset(events->mouse.buttons, 0, sizeof(events->mouse.buttons));
+
+	// change state
+	game->state = state;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */

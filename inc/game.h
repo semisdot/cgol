@@ -17,11 +17,10 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-enum
+enum // game states
 {
 	PAUSED,
-	RUNNING,
-	NEW
+	RUNNING
 };
 
 struct grid
@@ -40,7 +39,6 @@ struct game
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void update_game_state(struct events *events, struct game *game, int state);
 void simulation_step(struct game *game);
 
 

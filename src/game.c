@@ -8,14 +8,6 @@ static void update_game_grid(struct game *game);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void update_game_state(struct events *events, struct game *game, int state)
-{
-	// clear events
-	memset(events->keyboard.keys, 0, sizeof(events->keyboard.keys));
-
-	game->state = state;
-}
-
 void simulation_step(struct game *game)
 {
 	int neighbours;

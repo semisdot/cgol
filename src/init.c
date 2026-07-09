@@ -23,6 +23,7 @@ static void init_game_grid(struct grid *grid)
 	memset(grid->cells, 0, sizeof(grid->cells));
 
 	place_gosper_glider_gun(grid);
+	// place_random(game->grid_curr);
 }
 
 static void place_gosper_glider_gun(struct grid *grid)
